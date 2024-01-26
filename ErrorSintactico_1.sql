@@ -1,0 +1,1 @@
+SELECT ClienteID WHERE Edad > 20 FROM Clientes;

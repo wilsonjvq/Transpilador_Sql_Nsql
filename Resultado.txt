@@ -1,0 +1,36 @@
+// Crear una colección Empleados
+db.createCollection("Empleados");
+
+// Insertar datos en la colección Empleados
+db.Empleados.insertMany([
+    {"EmpleadoID": 1, "Nombre": "Juan", "Apellido": "Pérez", "Edad": 20, "Salario": 1200.50, "Genero": "M", "FechaNacimiento": ISODate("2002-05-15"), "HoraContratacion": "00:18:40", "Email": "juan.perez@example.com"},
+    {"EmpleadoID": 2, "Nombre": "María", "Apellido": "Gómez", "Edad": 22, "Salario": 800.75, "Genero": "F", "FechaNacimiento": ISODate("2000-08-20"), "HoraContratacion": "14:15:00", "Email": "maria.gomez@example.com"},
+    {"EmpleadoID": 3, "Nombre": "Mario", "Apellido": "Sánchez", "Edad": 23, "Salario": 1600.25, "Genero": "M", "FechaNacimiento": ISODate("1999-08-22"), "HoraContratacion": "10:45:00", "Email": "mario.sanchez@example.com"},
+    {"EmpleadoID": 4, "Nombre": "Lucía", "Apellido": "Fernández", "Edad": 21, "Salario": 1200.75, "Genero": "F", "FechaNacimiento": ISODate("2000-11-15"), "HoraContratacion": "15:30:00", "Email": "lucia.fernandez@example.com"}
+]);
+
+
+// Consultas SELECT
+db.Empleados.find();
+db.Empleados.find({}, { EmpleadoID: 1, Nombre: 1, Edad: 1, HoraContratacion: 1 });
+db.Empleados.find({ Edad: { $gt: 22 } });
+db.Empleados.find().sort({ Salario: -1 });
+db.Empleados.find({ Salario: { $gt: 1000 } });
+db.empleados.find({ salario: { $gt: 1300 } },{EmpleadoID: 1, nombre: 1 })
+
+// Consultas UPDATE
+db.Empleados.updateMany({}, { $inc: { Edad: 1 } });
+db.Empleados.updateOne({ EmpleadoID: 1 }, { $set: { Salario: 1400.00, HoraContratacion: '08:00:30' } });
+db.Empleados.updateOne({ EmpleadoID: 6 }, { $set: { Nombre: 'Luisa', Apellido: 'Gutiérrez' } });
+db.Empleados.updateMany({ Edad: { $gt: 22 } }, { $inc: { Salario: -200.00 } });
+
+
+// Consultas DELETE
+db.Empleados.deleteOne({ EmpleadoID: 1 });
+db.Empleados.deleteMany({ Edad: 21 });
+
+DELETE FROM Empleados WHERE EmpleadoID = 1;
+
+DELETE FROM Empleados WHERE Edad = 21;
+
+

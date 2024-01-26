@@ -1,0 +1,32 @@
+db.createCollection("Clientes");
+
+db.Clientes.insertMany([
+	{ ClienteID: 1, Nombre: 'Ana', Apellido: 'Martinez', Edad: 30, MontoCompra: 500.50, Genero: 'F', FechaRegistro: '2000-10-15', HoraUltimaCompra: '08:45:30', Email: 'ana.martinez@example.com' },
+	{ ClienteID: 2, Nombre: 'Carlos', Apellido: 'Gonzalez', Edad: 45, MontoCompra: 1200.75, Genero: 'M', FechaRegistro: '1995-05-20', HoraUltimaCompra: '14:30:00', Email: 'carlos.gonzalez@example.com' },
+	{ ClienteID: 3, Nombre: 'Elena', Apellido: 'Snchez', Edad: 28, MontoCompra: 800.25, Genero: 'F', FechaRegistro: '2005-12-22', HoraUltimaCompra: '10:15:45', Email: 'elena.sanchez@example.com' }
+]);
+
+db.Clientes.find({});
+
+db.Clientes.find({}, { ClienteID: 1, Nombre: 1, Edad: 1, HoraUltimaCompra: 1 });
+
+db.Clientes.find({ Edad: { $gt: 30 }}, { Nombre: 1, Edad: 1 });
+
+db.Clientes.find().sort({ MontoCompra: -1 });
+
+db.Clientes.find({ MontoCompra: { $gt: 1000 }});
+
+db.Clientes.find({ MontoCompra: { $gt: 800 }}, { ClienteID: 1, Nombre: 1 });
+
+db.Clientes.updateMany({}, { $inc: { Edad: 1 } });
+
+db.Clientes.updateMany({ ClienteID: { $eq: 1 }}, { $set: { MontoCompra: 1500.00 } });
+
+db.Clientes.updateMany({ ClienteID: { $eq: 3 }}, { $set: { Nombre: 'Luis' } });
+
+db.Clientes.updateMany({ Edad: { $gt: 35 }}, { $inc: { MontoCompra: -200.00 } });
+
+db.Clientes.deleteMany({ ClienteID: 2 });
+
+db.Clientes.deleteMany({ Edad: 28 });
+
